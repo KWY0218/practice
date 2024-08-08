@@ -1,11 +1,11 @@
-package org.kwy.coupon.coupon.application.port.`in`
+package org.kwy.coupon.coupon.presentation.admin.dto.req
 
-import org.kwy.coupon.coupon.domain.Coupon
+import org.kwy.coupon.coupon.application.port.`in`.CreateCouponCommend
 import org.kwy.coupon.coupon.domain.CouponType
 import org.kwy.coupon.coupon.domain.DiscountType
 import java.time.LocalDate
 
-data class CreateCouponCommend(
+data class CouponRequestDto(
     val couponName: String,
     val startDate: LocalDate,
     val endDate: LocalDate,
@@ -17,8 +17,8 @@ data class CreateCouponCommend(
     val couponType: CouponType,
     val targets: List<Long>? = null
 ) {
-    fun toCoupon(): Coupon = Coupon(
-        name = this.couponName,
+    fun toCreateCouponCommend() = CreateCouponCommend(
+        couponName = this.couponName,
         startDate = this.startDate,
         endDate = this.endDate,
         maxIssuePerUserCnt = this.maxIssuePerUserCnt,
@@ -26,7 +26,7 @@ data class CreateCouponCommend(
         discountType = this.discountType,
         discountValue = this.discountValue,
         maxDiscountAmount = this.maxDiscountAmount,
-        type = this.couponType,
+        couponType = this.couponType,
         targets = this.targets
     )
 }

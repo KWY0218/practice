@@ -1,6 +1,5 @@
 package org.kwy.coupon.coupon.domain
 
-import org.kwy.coupon.coupon.domain.policy.DiscountPolicy
 import java.time.LocalDate
 
 data class Coupon(
