@@ -1,13 +1,15 @@
 package org.kwy.coupon.coupon.persistence.entity
 
 import jakarta.persistence.*
+import org.kwy.coupon.coupon.domain.CouponUser
 
-@Table(name = "discount_target")
+
+@Table(name = "coupon_user")
 @Entity
-class DiscountTargetEntity(
+class CouponUserEntity(
     id: Long? = null,
-    couponId: Long,
-    targetId: Long
+    userId: Long,
+    couponId: Long
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +17,16 @@ class DiscountTargetEntity(
         protected set
 
     @Column(nullable = false)
-    var couponId = couponId
+    var userId = userId
         protected set
 
     @Column(nullable = false)
-    var targetId = targetId
+    var couponId = couponId
         protected set
+
+    fun toCouponUser() = CouponUser(
+        id = this.id,
+        couponId = this.couponId,
+        userId = this.userId
+    )
 }
