@@ -1,5 +1,6 @@
 package org.kwy.coupon.coupon.presentation.user
 
+import org.kwy.coupon.config.resolver.UserId
 import org.kwy.coupon.coupon.application.port.`in`.IssueCouponUseCase
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable
@@ -17,7 +18,7 @@ class CouponUserController(
     @PostMapping("/{couponId}")
     fun issueCoupon(
         @PathVariable couponId: Long,
-        userId: Long
+        @UserId userId: Long
     ): ResponseEntity<Unit> {
         val issuedCoupon = issueCouponUseCase.issue(couponId, userId)
         return ResponseEntity
