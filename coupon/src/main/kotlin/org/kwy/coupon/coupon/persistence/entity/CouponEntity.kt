@@ -63,6 +63,7 @@ class CouponEntity(
         protected set
 
     fun toCoupon(targets: List<Long>?): Coupon = Coupon(
+        id = this.id,
         name = this.name,
         startDate = this.startDate,
         endDate = this.endDate,
