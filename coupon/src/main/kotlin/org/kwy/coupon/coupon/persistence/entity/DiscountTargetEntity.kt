@@ -6,11 +6,16 @@ import jakarta.persistence.*
 @Entity
 class DiscountTargetEntity(
     id: Long? = null,
+    couponId: Long,
     targetId: Long
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id = id
+        protected set
+
+    @Column(nullable = false)
+    var couponId = couponId
         protected set
 
     @Column(nullable = false)

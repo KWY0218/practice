@@ -28,9 +28,14 @@ class CreateCouponAdapter(
 
         couponRepository.save(couponEntity)
 
-        coupon.targets?.forEach { targetId ->
-            val discountTarget = DiscountTargetEntity(targetId = targetId)
-            discountTargetRepository.save(discountTarget)
+        couponEntity.id?.let { couponId ->
+            coupon.targets?.forEach { targetId ->
+                val discountTarget = DiscountTargetEntity(
+                    couponId = couponId,
+                    targetId = targetId
+                )
+                discountTargetRepository.save(discountTarget)
+            }
         }
 
         return couponEntity.toCoupon(coupon.targets)
