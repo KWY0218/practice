@@ -4,6 +4,7 @@ plugins {
     kotlin("plugin.jpa") version "1.9.24"
     kotlin("jvm") version "1.9.24"
     kotlin("plugin.spring") version "1.9.24"
+    kotlin("kapt") version "1.9.23"
 }
 
 group = "org.kwy"
@@ -15,11 +16,26 @@ java {
     }
 }
 
+allOpen {
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.MappedSuperclass")
+    annotation("jakarta.persistence.Embeddable")
+}
+
 repositories {
     mavenCentral()
 }
 
+val queryDslVersion = "5.0.0" // QueryDSL Version Setting
+
 dependencies {
+    // QueryDSL
+    api("com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta")
+    kapt("com.querydsl:querydsl-apt:${queryDslVersion}:jakarta")
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+    implementation(kotlin("stdlib-jdk8"))
+
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
